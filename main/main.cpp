@@ -1,3 +1,4 @@
+#include "freertos/projdefs.h"
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
@@ -66,7 +67,8 @@ extern "C" void app_main()
     for (;;)
     {
         const int get_button = gpio_get_level(BUTTON_GPIO);
-        //ESP_LOGI(TAG, "Bouton : %d ", get_button);
+        ESP_LOGI(TAG, "Bouton : %d ", get_button);
+        vTaskDelay(pdMS_TO_TICKS(1000));
     
         if (get_button == 0)
         {
