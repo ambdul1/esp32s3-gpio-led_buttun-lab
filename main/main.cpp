@@ -32,14 +32,7 @@ extern "C" void app_main()
     const esp_err_t led_result = gpio_config(&led_config);
     const esp_err_t button_result = gpio_config(&button_config);
 
-    if (led_result != ESP_OK)
-    {
-        ESP_LOGE(
-                TAG,
-                "Echec de la configuration de la led sur le GPIO 7 : %s",
-                esp_err_to_name(led_result));
-        return;
-    } else if (button_result != ESP_OK)
+    if (button_result != ESP_OK)
     {
         ESP_LOGE(
                 TAG,
@@ -48,6 +41,15 @@ extern "C" void app_main()
         return;
     }
 
+    else if (led_result != ESP_OK)
+    {
+        ESP_LOGE(
+                TAG,
+                "Echec de la configuration de la led sur le GPIO 7 : %s",
+                esp_err_to_name(led_result));
+        return;
+    }
+    
     const esp_err_t led_level = gpio_set_level(LED_GPIO, 0);
 
     if (led_level != ESP_OK)
@@ -60,13 +62,22 @@ extern "C" void app_main()
         return;
     }
 
-    // int get_button;
 
     for (;;)
     {
-        int get_button = gpio_get_level(BUTTON_GPIO);
-        ESP_LOGI(TAG, "Bouton : %d ", get_button);
-        vTaskDelay(pdMS_TO_TICKS(200));
+        const int get_button = gpio_get_level(BUTTON_GPIO);
+        //ESP_LOGI(TAG, "Bouton : %d ", get_button);
+    
+        if (get_button == 0)
+        {
+            gpio_set_level(LED_GPIO, 1);
+            ESP_LOGE(TAG, "Allume : %d ", get_button);
+        } else {
+            gpio_set_level(LED_GPIO, 0);
+            ESP_LOGE(TAG, "Eteint : %d", get_button);
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(20));
     }
 
 }
