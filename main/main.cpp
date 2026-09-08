@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
@@ -65,17 +66,21 @@ extern "C" void app_main()
 
     for (;;)
     {
-        const int get_button = gpio_get_level(BUTTON_GPIO);
-        //ESP_LOGI(TAG, "Bouton : %d ", get_button);
+        //const int command = gpio_get_level(BUTTON_GPIO);
+        //ESP_LOGI(TAG, "Bouton : %d ", command);
         //vTaskDelay(pdMS_TO_TICKS(500));
     
-        if (get_button == 0)
+        const int command = std::getchar();
+
+        if (command == '0')
         {
             gpio_set_level(LED_GPIO, 1);
-            //ESP_LOGI(TAG, "Allume : %d ", get_button);
-        } else {
+            ESP_LOGI(TAG, "Commande 1 : LED allume ");
+            //ESP_LOGI(TAG, "Allume : %d ", command);
+        } else if (command == '1'){
             gpio_set_level(LED_GPIO, 0);
-            //ESP_LOGI(TAG, "Eteint : %d", get_button);
+            ESP_LOGI(TAG, "Commande 0 : LED eteinte");
+            //ESP_LOGI(TAG, "Eteint : %d", command);
         }
 
         vTaskDelay(pdMS_TO_TICKS(20));
