@@ -7,15 +7,14 @@
 
 ## Etapes principales
 
-- `get_idf`
+```fish 
+idf.py set-target esp32s3
 
-- `idf.py set-target esp32s3 (ou un autre type)`
+idf.py build
 
-- `idf.py build`
+idf.py -p /dev/ttyACM0 flash monitor
 
-- `idf.py flash ou idf.py -p /dev/ttyACM0 flash`
-
-- `idf.py monitor`
+```
 
 ## Controle depuis le moniteur serie
 
@@ -25,7 +24,7 @@ Le programme utilise `std::getchar()` pour recevoir une commande depuis
 - La touche `1` allume la LED.
 - La touche `0` éteint la LED.
 
-`std::getchar()` renvoie un `int` representant le caractere reçu.
+`std::getchar()` renvoie un `int` representant le caractere recu.
 Il faut donc comparer la commande avec `'0'` ou `'1'`, entre apostrophes.
 
 `command == 0` ne represente pas la touche `0` : cela compare la commande
