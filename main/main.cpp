@@ -1,4 +1,3 @@
-#include "freertos/projdefs.h"
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
@@ -51,14 +50,14 @@ extern "C" void app_main()
         return;
     }
     
-    const esp_err_t led_level = gpio_set_level(LED_GPIO, 0);
+    const esp_err_t led_set_result = gpio_set_level(LED_GPIO, 0);
 
-    if (led_level != ESP_OK)
+    if (led_set_result != ESP_OK)
     {
         ESP_LOGE(
                 TAG,
                 "Echec de l initialisation du LED a l etat le plus bas (LOW) %s",
-                esp_err_to_name(led_level)
+                esp_err_to_name(led_set_result)
                 );
         return;
     }
@@ -67,16 +66,16 @@ extern "C" void app_main()
     for (;;)
     {
         const int get_button = gpio_get_level(BUTTON_GPIO);
-        ESP_LOGI(TAG, "Bouton : %d ", get_button);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        //ESP_LOGI(TAG, "Bouton : %d ", get_button);
+        //vTaskDelay(pdMS_TO_TICKS(500));
     
         if (get_button == 0)
         {
             gpio_set_level(LED_GPIO, 1);
-            ESP_LOGE(TAG, "Allume : %d ", get_button);
+            //ESP_LOGI(TAG, "Allume : %d ", get_button);
         } else {
             gpio_set_level(LED_GPIO, 0);
-            ESP_LOGE(TAG, "Eteint : %d", get_button);
+            //ESP_LOGI(TAG, "Eteint : %d", get_button);
         }
 
         vTaskDelay(pdMS_TO_TICKS(20));
