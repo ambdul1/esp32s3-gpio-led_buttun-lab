@@ -2,7 +2,7 @@
 ![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![ESP-IDF](https://img.shields.io/badge/ESP--IDF-0091BD?style=for-the-badge&logo=espressif&logoColor=white)
 ![Status](https://img.shields.io/badge/status-learning-yellow?style=for-the-badge)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Commandes
 
 ## Etapes principales
