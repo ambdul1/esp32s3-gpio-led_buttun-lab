@@ -17,10 +17,21 @@
 
 - `idf.py monitor`
 
-## Exemple d utilisation 
+## Controle depuis le moniteur serie
 
-**_On peut ajouter dans la boucle `getchar` pour prendre une entree comme `0` ou `1`, allumer la led ou l eteindre.  
-NB: commande == 0 est faux, `getchar` prend uniquement des caracteres._**
+Le programme utilise `std::getchar()` pour recevoir une commande depuis
+`idf.py monitor`.
+
+- La touche `1` allume la LED.
+- La touche `0` éteint la LED.
+
+`std::getchar()` renvoie un `int` representant le caractere reçu.
+Il faut donc comparer la commande avec `'0'` ou `'1'`, entre apostrophes.
+
+`command == 0` ne represente pas la touche `0` : cela compare la commande
+avec le caractere nul. Le caractere `'0'` possede generalement la valeur
+ASCII 48.
+
 ### Exemple de code:
 
 ```c++

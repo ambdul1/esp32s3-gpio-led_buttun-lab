@@ -72,12 +72,12 @@ extern "C" void app_main()
     
         const int command = std::getchar();
 
-        if (command == '0')
+        if (command == '1')
         {
             gpio_set_level(LED_GPIO, 1);
             ESP_LOGI(TAG, "Commande 1 : LED allume ");
             //ESP_LOGI(TAG, "Allume : %d ", command);
-        } else if (command == '1'){
+        } else if (command == '0'){
             gpio_set_level(LED_GPIO, 0);
             ESP_LOGI(TAG, "Commande 0 : LED eteinte");
             //ESP_LOGI(TAG, "Eteint : %d", command);
